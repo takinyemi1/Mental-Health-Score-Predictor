@@ -110,14 +110,10 @@ Mental-Health-Score-Predictor/
 ├── data/
 │   └── Student_Social_Media_And_Mental_Health_Impact.csv
 │
-├── models/
-│   └── Mental_Health_Model.pkl
-│
 ├── notebooks/
 │   └── mental_health_score_predictor.ipynb
 │
 ├── interface/
-│   ├── main.py
 │   ├── assets/
 │       └── mind.png
 │   └── dashboard/
@@ -133,7 +129,9 @@ Mental-Health-Score-Predictor/
 │   └── sleep_hours_per_night_vs_mental_health_score_scatter_plot.png
 │   └── stress_level_vs_mental_health_score_boxplot.png
 │
+├── Mental_Health_Model.pkl
 ├── requirements.txt
 ├── README.md
+├── main.py
 └── ...
 ```

@@ -6,7 +6,7 @@ from typing import Literal # custom datatype
 from fastapi.middleware.cors import CORSMiddleware
 
 model = joblib.load(
-    r'D:\Mental Health Score Predictor\interface\Mental_Health_Model.pkl')
+    r'D:\Mental Health Score Predictor\Mental_Health_Model.pkl')
 top_countries = [
     'Other',
     'India',
@@ -32,7 +32,7 @@ app.add_middleware(
 # create a first Pydantic Model - data validation is being performed
 class StudentData(BaseModel): # defines structured data models
     age: int = Field(..., ge=10, le=88) # boundaries: age must be >= (greater than or) 10 and <= 88 (less than or)
-    gender: str = Literal['Male', 'Female']
+    gender: Literal['Female', 'Male']
     country: str
     academic_level: Literal['Undergraduate', 'Graduate', 'High School']
     most_used_platform: Literal['Facebook', 'LinkedIn', 'Instagram', 'Snapchat', 'Twitter', 
