@@ -1,3 +1,4 @@
+from pathlib import Path
 import joblib
 import pandas as pd
 from fastapi import FastAPI
@@ -5,8 +6,11 @@ from pydantic import BaseModel, Field
 from typing import Literal # custom datatype
 from fastapi.middleware.cors import CORSMiddleware
 
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_PATH = BASE_DIR / "Mental_Health_Model.pkl"
+
 model = joblib.load(
-    r'D:\Mental Health Score Predictor\Mental_Health_Model.pkl')
+    MODEL_PATH)
 top_countries = [
     'Other',
     'India',
