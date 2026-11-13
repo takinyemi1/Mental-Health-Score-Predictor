@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field
 from typing import Literal # custom datatype
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastpi.responses import FileResponse
+# from fastpi.responses import FileResponse
 
 BASE_DIR = Path(__file__).resolve().parent
 MODEL_PATH = BASE_DIR / "Mental_Health_Model.pkl"
