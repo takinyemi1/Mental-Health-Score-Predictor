@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent
 MODEL_PATH = BASE_DIR / "Mental_Health_Model.pkl"
 
 INTERFACE_DIR = BASE_DIR / "interface"
-ASSETS_DIR = BASE_DIR / "assets"
+ASSETS_DIR = INTERFACE_DIR / "assets"
 
 model = joblib.load(
     MODEL_PATH)
