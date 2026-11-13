@@ -39,7 +39,7 @@ Frontend Response
 
 Try the deployed application here:
 
-<a href="">Mental Health Score Predictor</a>
+<a href="https://mental-health-score-predictor-xmla.onrender.com">Mental Health Score Predictor</a>
 
 This application is deployed on Render and can be accessed directly from a web browser.
 
@@ -47,7 +47,7 @@ This application is deployed on Render and can be accessed directly from a web b
 
 ### **1. Linear Regression**
 
-Used an a baseline regression model to establish a straightforward reference point for comparing model performance.
+Used as a baseline regression model to establish a straightforward reference point for comparing model performance.
 
 ### **2. Random Forest Regression**
 
@@ -59,8 +59,8 @@ A tree-based ensemble model used to capture nonlinear relationships between inpu
 
 ## **Result**
 
-It's important to note from the experiment that the tuned model did not outperform the default Random Forest model. And though the margin was small, this further emphasizes why model selection should be 
-based on validation/test performance rather than assumption, because hyperparameter tuning won't always show better results.
+It's important to note that the tuned model did not outperform the default Random Forest model. And though the margin was small, this further emphasizes why model selection should be 
+based on validation/test performance rather than assumptions, because hyperparameter tuning won't always show better results.
 
 ## **Model Performance**
 
@@ -74,7 +74,7 @@ based on validation/test performance rather than assumption, because hyperparame
 
 - **R<sup>2</sup>:** Measures how much of the variation in mental health scores our model explains, from 0 (useless) to 1 (perfect). > 0.85 means the model explains 85% of the pattern.
 
-- **MAE (Mean Absolute Error):** Measures on average, how far off our prediction is (i.e., lower values indicate smaller average prediction errors).
+- **MAE (Mean Absolute Error):** Measures, on average, how far off our prediction is (i.e., lower values indicate smaller average prediction errors).
 
 - **RMSE (Root Mean Squared Error):** It's similar to MAE (i.e., lower values indicate better prediction performance), but penalizes big mistakes more heavily.
 
@@ -116,10 +116,9 @@ Mental-Health-Score-Predictor/
 ├── interface/
 │   ├── assets/
 │       └── mind.png
-│   └── dashboard/
-│       └── index.html
-│       └── script.js
-│       └── style.css
+│   └── index.html
+│   └── script.js
+│   └── style.css
 ├── plots
 │   └── avg_daily_use_hours_vs_mental_health_score_scatterplot.png
 │   └── mental_health_score_heatmap.png
