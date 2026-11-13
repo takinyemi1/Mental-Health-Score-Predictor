@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent
 MODEL_PATH = BASE_DIR / "Mental_Health_Model.pkl"
 
 INTERFACE_DIR = BASE_DIR / "interface"
-ASSETS_DIR = INTERFACE_DIR / "assets"
+ASSETS_DIR = BASE_DIR / "assets"
 
 model = joblib.load(
     MODEL_PATH)
@@ -45,11 +45,11 @@ app.mount(
     name="assets"
 )
 
-# serves css/js
+# serves the frontend
 app.mount(
-    "/static",
-    StaticFiles(directory=INTERFACE_DIR),
-    name="static"
+    "/",
+    StaticFiles(directory=INTERFACE_DIR, html=True),
+    name="frontend"
 )
 
 # create a first Pydantic Model - data validation is being performed
@@ -73,9 +73,9 @@ class PredictionResponse(BaseModel):
     predicted_mental_health_score:float
     # 6.77 -> float
 
-@app.get('/')  # homepage (default)
-def home():
-    return FileResponse(INTERFACE_DIR / "dashboard/index.html")
+# @app.get('/')  # homepage (default)
+# def greet():
+#     return {'Mental Health Score Predictor'}
 
 # to call in terminal: uvicorn main (name of the main file):app (name of the app object) --reload
 
