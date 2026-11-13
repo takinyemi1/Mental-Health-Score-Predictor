@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field
 from typing import Literal # custom datatype
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-# from fastpi.responses import FileResponse
+from fastpi.responses import FileResponse
 
 BASE_DIR = Path(__file__).resolve().parent
 MODEL_PATH = BASE_DIR / "Mental_Health_Model.pkl"
@@ -45,11 +45,11 @@ app.mount(
     name="assets"
 )
 
-# serves the frontend
+# serves css/js
 app.mount(
-    "/",
-    StaticFiles(directory=INTERFACE_DIR, html=True),
-    name="frontend"
+    "/static",
+    StaticFiles(directory=INTERFACE_DIR),
+    name="static"
 )
 
 # create a first Pydantic Model - data validation is being performed
@@ -73,9 +73,9 @@ class PredictionResponse(BaseModel):
     predicted_mental_health_score:float
     # 6.77 -> float
 
-# @app.get('/')  # homepage (default)
-# def greet():
-#     return {'Mental Health Score Predictor'}
+@app.get('/')  # homepage (default)
+def home():
+    return FileResponse(INTERFACE_DIR / "dashboard/index.html")
 
 # to call in terminal: uvicorn main (name of the main file):app (name of the app object) --reload
 
