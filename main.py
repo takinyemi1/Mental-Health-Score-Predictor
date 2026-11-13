@@ -56,7 +56,7 @@ if ASSETS_DIR.exists():
     
 @app.get("/")  # homepage (default)
 def home():
-    return FileResponse(INTERFACE_DIR / "dashboard/index.html")
+    return FileResponse(INTERFACE_DIR / "index.html")
 
 # create a first Pydantic Model - data validation is being performed
 class StudentData(BaseModel): # defines structured data models
