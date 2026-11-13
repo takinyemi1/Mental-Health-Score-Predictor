@@ -5,9 +5,14 @@ from fastapi import FastAPI
 from pydantic import BaseModel, Field
 from typing import Literal # custom datatype
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastpi.responses import FileResponse
 
 BASE_DIR = Path(__file__).resolve().parent
 MODEL_PATH = BASE_DIR / "Mental_Health_Model.pkl"
+
+INTERFACE_DIR = BASE_DIR / "interface"
+ASSETS_DIR = BASE_DIR / "assets"
 
 model = joblib.load(
     MODEL_PATH)
@@ -33,6 +38,20 @@ app.add_middleware(
     allow_headers=['*'],
 )
 
+# images and other assets
+app.mount(
+    "/assets",
+    StaticFiles(directory=ASSETS_DIR),
+    name="assets"
+)
+
+# serves the frontend
+app.mount(
+    "/",
+    StaticFiles(directory=INTERFACE_DIR, html=True),
+    name="frontend"
+)
+
 # create a first Pydantic Model - data validation is being performed
 class StudentData(BaseModel): # defines structured data models
     age: int = Field(..., ge=10, le=88) # boundaries: age must be >= (greater than or) 10 and <= 88 (less than or)
@@ -54,9 +73,9 @@ class PredictionResponse(BaseModel):
     predicted_mental_health_score:float
     # 6.77 -> float
 
-@app.get('/')  # homepage (default)
-def greet():
-    return {'Mental Health Score Predictor'}
+# @app.get('/')  # homepage (default)
+# def greet():
+#     return {'Mental Health Score Predictor'}
 
 # to call in terminal: uvicorn main (name of the main file):app (name of the app object) --reload
 
