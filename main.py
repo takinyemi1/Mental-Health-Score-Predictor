@@ -1,12 +1,13 @@
 from pathlib import Path
 import joblib
 import pandas as pd
+
 from fastapi import FastAPI
-from pydantic import BaseModel, Field
-from typing import Literal # custom datatype
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+from pydantic import BaseModel, Field
+from typing import Literal # custom datatype
 
 BASE_DIR = Path(__file__).resolve().parent
 MODEL_PATH = BASE_DIR / "Mental_Health_Model.pkl"
@@ -33,24 +34,29 @@ app = FastAPI()  # create API object
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['*'],
-    allow_methods=['*'],
-    allow_headers=['*'],
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-# images and other assets
+# css and js from the interface folder
 app.mount(
-    "/assets",
-    StaticFiles(directory=ASSETS_DIR),
-    name="assets"
+    "/static",
+    StaticFiles(directory=INTERFACE_DIR),
+    name="static"
 )
 
-# serves the frontend
-app.mount(
-    "/",
-    StaticFiles(directory=INTERFACE_DIR, html=True),
-    name="frontend"
-)
+# serves images from interface/assets
+if ASSETS_DIR.exists():
+    app.mount(
+        "/assets",
+        StaticFiles(directory=ASSETS_DIR),
+        name="assets"
+    )
+    
+@app.get("/")  # homepage (default)
+def home():
+    return FileResponse(INTERFACE_DIR / "dashboard/index.html")
 
 # create a first Pydantic Model - data validation is being performed
 class StudentData(BaseModel): # defines structured data models
@@ -72,10 +78,6 @@ class StudentData(BaseModel): # defines structured data models
 class PredictionResponse(BaseModel):
     predicted_mental_health_score:float
     # 6.77 -> float
-
-# @app.get('/')  # homepage (default)
-# def greet():
-#     return {'Mental Health Score Predictor'}
 
 # to call in terminal: uvicorn main (name of the main file):app (name of the app object) --reload
 
